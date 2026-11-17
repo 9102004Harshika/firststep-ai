@@ -1,0 +1,37 @@
+{
+  "name": "firststep-ai-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "ingest": "node src/scripts/runIngestion.js",
+    "ingest:memory": "node src/scripts/withMemoryMongo.js src/scripts/runIngestion.js",
+    "classify": "node src/scripts/runClassification.js",
+    "classify:memory": "node src/scripts/withMemoryMongo.js src/scripts/runClassification.js",
+    "dev:memory": "node src/scripts/withMemoryMongo.js src/server.js",
+    "dev:stack": "node src/scripts/devStack.js",
+    "mongo": "node src/scripts/startFirststepMongo.js",
+    "migrate:atlas": "node src/scripts/migrateToAtlas.js",
+    "recompute:india": "node src/scripts/recomputeIndiaRelevance.js",
+    "verify:sources": "node src/scripts/verifySources.js",
+    "export:evaluation": "node src/scripts/exportEvaluation.js",
+    "import:evaluation": "node src/scripts/importEvaluation.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.3",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^11.3.0",
+    "supertest": "^7.0.0",
+    "vitest": "^2.1.8"
+  }
+}

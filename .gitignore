@@ -1,0 +1,41 @@
+# dependencies
+node_modules/
+**/node_modules/
+
+# env / secrets — never commit
+.env
+.env.*
+!.env.example
+**/.env
+!**/.env.example
+
+# local mongo / data
+.data/
+*.lock
+
+# build / cache
+dist/
+build/
+coverage/
+.vite/
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# evaluation scratch (keep labeled CSVs tracked intentionally)
+evaluation/_review_pack.json
+evaluation/_sample50.json
+evaluation/_batch_pending_review.json
+
+# local probe / scan scratch
+backend/tmp/
+
+# OS / archives
+*.zip
+!docs/**/*.zip

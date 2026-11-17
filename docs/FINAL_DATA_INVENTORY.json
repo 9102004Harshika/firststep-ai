@@ -1,0 +1,332 @@
+{
+  "generatedAt": "2026-11-17T12:03:19.862Z",
+  "database": "firststep_ai",
+  "counts": {
+    "totalRecords": 2397,
+    "uniqueActive": 2397,
+    "indiaRelevantActive": 1678,
+    "meets200IndiaRelevant": true,
+    "earlyCareerIndia": 374,
+    "fresherEligibleIndia": 134,
+    "internshipIndia": 189,
+    "nonIndiaOrUnknownGeoActive": 719,
+    "classifiedIndia": 276,
+    "unknownRoleAmongIndia": 1436,
+    "classificationFailed": 81,
+    "classificationPending": 1913,
+    "duplicateFingerprintGroups": 1
+  },
+  "byCity": [
+    {
+      "city": "Bengaluru",
+      "count": 905
+    },
+    {
+      "city": "Mumbai",
+      "count": 154
+    },
+    {
+      "city": "Pune",
+      "count": 105
+    },
+    {
+      "city": "Gurugram",
+      "count": 104
+    },
+    {
+      "city": "Hyderabad",
+      "count": 87
+    },
+    {
+      "city": "Chennai",
+      "count": 81
+    },
+    {
+      "city": "Delhi",
+      "count": 42
+    },
+    {
+      "city": "Noida",
+      "count": 14
+    },
+    {
+      "city": "Kolkata",
+      "count": 11
+    },
+    {
+      "city": "Vadodara",
+      "count": 10
+    },
+    {
+      "city": "Lucknow",
+      "count": 7
+    },
+    {
+      "city": "Chandigarh",
+      "count": 5
+    },
+    {
+      "city": "Coimbatore",
+      "count": 5
+    },
+    {
+      "city": "Indore",
+      "count": 4
+    },
+    {
+      "city": "Jaipur",
+      "count": 4
+    },
+    {
+      "city": "Visakhapatnam",
+      "count": 3
+    },
+    {
+      "city": "Ahmedabad",
+      "count": 3
+    },
+    {
+      "city": "Mysuru",
+      "count": 1
+    },
+    {
+      "city": "Kochi",
+      "count": 1
+    },
+    {
+      "city": "Nagpur",
+      "count": 1
+    },
+    {
+      "city": "Bhopal",
+      "count": 1
+    },
+    {
+      "city": "Surat",
+      "count": 1
+    }
+  ],
+  "byRole": [
+    {
+      "role": "Unknown",
+      "count": 1436
+    },
+    {
+      "role": "Software Development",
+      "count": 54
+    },
+    {
+      "role": "Other",
+      "count": 51
+    },
+    {
+      "role": "Machine Learning / AI",
+      "count": 20
+    },
+    {
+      "role": "Human Resources",
+      "count": 19
+    },
+    {
+      "role": "Operations",
+      "count": 18
+    },
+    {
+      "role": "UI/UX Design",
+      "count": 14
+    },
+    {
+      "role": "Product Management",
+      "count": 12
+    },
+    {
+      "role": "Data Analytics",
+      "count": 9
+    },
+    {
+      "role": "Finance",
+      "count": 9
+    },
+    {
+      "role": "Customer Support",
+      "count": 9
+    },
+    {
+      "role": "Marketing",
+      "count": 8
+    },
+    {
+      "role": "Business Development",
+      "count": 5
+    },
+    {
+      "role": "DevOps / Cloud",
+      "count": 5
+    },
+    {
+      "role": "Cybersecurity",
+      "count": 5
+    },
+    {
+      "role": "Sales",
+      "count": 3
+    },
+    {
+      "role": "Data Science",
+      "count": 1
+    }
+  ],
+  "bySource": [
+    {
+      "source": "greenhouse",
+      "count": 1250
+    },
+    {
+      "source": "smartrecruiters",
+      "count": 159
+    },
+    {
+      "source": "linkedin",
+      "count": 154
+    },
+    {
+      "source": "ashby",
+      "count": 105
+    },
+    {
+      "source": "lever",
+      "count": 8
+    },
+    {
+      "source": "workday",
+      "count": 2
+    }
+  ],
+  "byEmployer": [
+    {
+      "employer": "Capco",
+      "count": 115
+    },
+    {
+      "employer": "Swiggy",
+      "count": 106
+    },
+    {
+      "employer": "Okta",
+      "count": 86
+    },
+    {
+      "employer": "Databricks",
+      "count": 78
+    },
+    {
+      "employer": "Zscaler",
+      "count": 76
+    },
+    {
+      "employer": "MongoDB",
+      "count": 69
+    },
+    {
+      "employer": "Sarvam AI",
+      "count": 50
+    },
+    {
+      "employer": "InMobi",
+      "count": 46
+    },
+    {
+      "employer": "Stripe",
+      "count": 45
+    },
+    {
+      "employer": "Cloudflare",
+      "count": 45
+    },
+    {
+      "employer": "Rubrik",
+      "count": 37
+    },
+    {
+      "employer": "Instawork",
+      "count": 37
+    },
+    {
+      "employer": "HighRadius",
+      "count": 37
+    },
+    {
+      "employer": "Sigmoid",
+      "count": 37
+    },
+    {
+      "employer": "GitLab",
+      "count": 34
+    },
+    {
+      "employer": "Oliverseapac",
+      "count": 33
+    },
+    {
+      "employer": "Freshworks",
+      "count": 30
+    },
+    {
+      "employer": "Celonis",
+      "count": 24
+    },
+    {
+      "employer": "Smartsheet",
+      "count": 22
+    },
+    {
+      "employer": "Toast",
+      "count": 21
+    },
+    {
+      "employer": "Zinnov",
+      "count": 21
+    },
+    {
+      "employer": "HackerRank",
+      "count": 20
+    },
+    {
+      "employer": "Landor",
+      "count": 20
+    },
+    {
+      "employer": "Glance",
+      "count": 20
+    },
+    {
+      "employer": "Five9",
+      "count": 20
+    },
+    {
+      "employer": "Elastic",
+      "count": 19
+    },
+    {
+      "employer": "Razorpay",
+      "count": 18
+    },
+    {
+      "employer": "Fivetran",
+      "count": 17
+    },
+    {
+      "employer": "Freshprints",
+      "count": 17
+    },
+    {
+      "employer": "Karya",
+      "count": 16
+    }
+  ],
+  "notes": [
+    "Fetched/updated ingestion totals are NOT unique job counts.",
+    "indiaRelevantActive is the Beep 200+ uniqueness check used here.",
+    "earlyCareerIndia is a stricter product subset and may be < 200."
+  ]
+}

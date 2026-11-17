@@ -1,0 +1,106 @@
+{
+  "generatedAt": "2026-11-17T12:03:18.894Z",
+  "promptVersionCurrent": "v2",
+  "indiaRelevant": {
+    "classifiedTotal": 276,
+    "classifiedPromptV2": 246,
+    "failed": 30,
+    "pending": 1372,
+    "unknownRoleAmongV2": 4,
+    "unknownRoleRateV2": 0.0163,
+    "unknownCityAmongV2": 41,
+    "unknownCityRateV2": 0.1667,
+    "tokensInV2": 273561,
+    "tokensOutV2": 24314,
+    "estimatedCostV2": 0.0370817,
+    "costPer1000SuccessV2": 0.150739,
+    "byProvider": {
+      "openai/gpt-4o-mini": 246
+    },
+    "byRole": {
+      "Finance": 9,
+      "Other": 51,
+      "Operations": 18,
+      "Human Resources": 19,
+      "Customer Support": 9,
+      "Software Development": 54,
+      "Product Management": 12,
+      "Cybersecurity": 5,
+      "UI/UX Design": 14,
+      "DevOps / Cloud": 5,
+      "Marketing": 8,
+      "Machine Learning / AI": 20,
+      "Business Development": 5,
+      "Data Science": 1,
+      "Data Analytics": 9,
+      "Sales": 3,
+      "Unknown": 4
+    }
+  },
+  "humanEvaluation": {
+    "indiaBenchmarkRows": 50,
+    "labeledRowsDetected": 50,
+    "accuracyClaimAllowed": true,
+    "status": "READY_FOR_METRICS"
+  },
+  "latestClassificationRuns": [
+    {
+      "id": "6afbd408818bbb0a1ce9f840",
+      "status": "failed",
+      "provider": "openai",
+      "model": "gpt-4o-mini (corrected; was misrecorded as gemini-2.5-flash)",
+      "promptVersion": "v1",
+      "totals": {
+        "attempted": 0,
+        "succeeded": 0,
+        "failed": 0,
+        "skipped": 0,
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "estimatedCost": 0
+      },
+      "startedAt": "2026-11-17T04:11:52.062Z",
+      "finishedAt": "2026-11-17T10:10:09.700Z"
+    },
+    {
+      "id": "6afbd3c7467be8ba4563b6c4",
+      "status": "partial",
+      "provider": "openai",
+      "model": "gpt-4o-mini (corrected; was misrecorded as gemini-2.5-flash)",
+      "promptVersion": "v1",
+      "totals": {
+        "attempted": 40,
+        "succeeded": 24,
+        "failed": 16,
+        "skipped": 0,
+        "inputTokens": 44604,
+        "outputTokens": 7126,
+        "estimatedCost": 0.0073108
+      },
+      "startedAt": "2026-11-17T04:10:47.755Z",
+      "finishedAt": "2026-11-17T04:11:45.023Z"
+    },
+    {
+      "id": "6afbd338b906ed63be1f350f",
+      "status": "failed",
+      "provider": "gemini",
+      "model": "gemini-2.5-flash",
+      "promptVersion": "v1",
+      "totals": {
+        "attempted": 0,
+        "succeeded": 0,
+        "failed": 0,
+        "skipped": 0,
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "estimatedCost": 0
+      },
+      "startedAt": "2026-11-17T04:08:24.870Z",
+      "finishedAt": "2026-11-17T10:10:09.713Z"
+    }
+  ],
+  "verdict": {
+    "operationalClassification": "PARTIAL",
+    "humanAccuracy": "READY"
+  }
+}

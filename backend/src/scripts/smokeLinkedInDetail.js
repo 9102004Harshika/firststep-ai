@@ -1,0 +1,13 @@
+﻿const ua='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+const id='4453416357';
+const r=await fetch(`https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/${id}`,{headers:{'User-Agent':ua,Accept:'text/html'}});
+const html=await r.text();
+console.log('status', r.status, 'len', html.length);
+const title=(html.match(/class="top-card-layout__title[^"]*"[^>]*>([^<]+)/)||[])[1];
+const company=(html.match(/class="topcard__org-name-link[^"]*"[^>]*>([^<]+)/)||[])[1];
+const loc=(html.match(/class="topcard__flavor topcard__flavor--bullet"[^>]*>\s*([^<]+)/)||[])[1];
+const desc=(html.match(/class="show-more-less-html__markup[^"]*"[^>]*>([\s\S]*?)<\/div>/)||[])[1];
+const apply=(html.match(/href="(https:\/\/www\.linkedin\.com\/jobs\/view\/[^"]+)"/)||[])[1];
+const external=(html.match(/href="(https?:\/\/(?!www\.linkedin\.com)[^"]+)"/g)||[]).slice(0,10);
+console.log({title,company,loc:loc?.trim(),apply,descLen:desc?.length});
+console.log('external sample', external.slice(0,5));

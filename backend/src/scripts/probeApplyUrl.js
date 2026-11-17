@@ -1,0 +1,12 @@
+﻿const ua='Mozilla/5.0';
+const list=await fetch('https://careerscan.in/api/jobs?q=software+engineer+intern+frontend&limit=3',{headers:{'User-Agent':ua,Accept:'application/json'}}).then(r=>r.json());
+const job=list.jobs[0];
+const html=await fetch('https://careerscan.in/jobs/'+job.slug,{headers:{'User-Agent':ua}}).then(r=>r.text());
+const idx=html.indexOf('applyUrl');
+console.log(html.slice(idx-50, idx+400));
+const m=html.match(/applyUrl\\?":\\?"(https?:\\?\/\\?\/[^"\\]+)/);
+console.log('m', m&&m[1]);
+const m2=html.match(/applyUrl\":\"(https?:\\\/\\\/[^"]+)\"/);
+console.log('m2', m2&&m2[1]);
+const m3=[...html.matchAll(/applyUrl\":\"(.*?)\"/g)].map(x=>x[1]).slice(0,5);
+console.log('all', m3);

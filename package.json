@@ -1,0 +1,18 @@
+{
+  "name": "firststep-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "India fresher and internship opportunity intelligence platform",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "ingest": "npm run ingest --prefix backend",
+    "classify": "npm run classify --prefix backend",
+    "test": "npm test --prefix backend",
+    "build": "npm run build --prefix frontend"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
