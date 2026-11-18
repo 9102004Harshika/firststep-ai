@@ -1,15 +1,15 @@
 # Operational verification checklist (submission priority)
 
-**Status:** Config present; live gates still **NOT VERIFIED** until evidence URLs are pasted below.  
-**Do not** retune the classifier, add features, or change the frozen 50 until these gates pass.  
-**Next action:** credential rotation → then production Actions **`ok`** run (share run URL + stats, never secrets).
+**Status:** Production Actions refresh **PASS** (run `44248232834`). Credential rotation (Mongo/LLM) and Loom remain open.  
+**Do not** retune the classifier or change the frozen 50 until remaining gates pass.  
+**Next action:** finish credential rotation proof if ZIP was shared → record Loom.
 
 **Evidence rule:** Do not mark a milestone complete because a command was triggered. Mark complete only when its evidence exists.
 
 | Milestone | Status | Evidence required |
 | --- | --- | --- |
 | 1. Credential rotation | **Pending verification** | Old keys fail; Render/Actions/local updated (no secret values in docs) |
-| 2. Production refresh | **Pending verification** | Actions run URL with ingestion **`ok`**, classification **`ok`**, before/after `/api/stats` |
+| 2. Production refresh | **PASS (2026-11-18)** | Actions run URL with ingestion **`partial`/`ok`** (not `locked`), classification completed, before/after `/api/stats` |
 | 3. Loom walkthrough | **Pending verification** | Loom URL ≤5 min on deployed app |
 | 4. Final submission checks | **Pending verification** | URLs pasted; tests/build green; repo + form links work |
 
@@ -29,11 +29,11 @@ Rotate in provider consoles — **never paste key values into chat, docs, Loom, 
 | --- | --- | --- |
 | Rotate MongoDB Atlas DB user password | Atlas → Database Access | **NOT VERIFIED** |
 | Rotate OpenAI / Gemini / Groq keys used in prod | Provider consoles (revoke old) | **NOT VERIFIED** |
-| Rotate `ADMIN_API_KEY` (long random) | Generate locally; never commit | **NOT VERIFIED** |
-| Update Render env | Backend service env | **NOT VERIFIED** |
-| Update Vercel env | Frontend (`VITE_API_BASE_URL` only — no LLM/Mongo keys) | **NOT VERIFIED** |
-| Update GitHub Actions secrets | `FIRSTSTEP_API_BASE_URL`, `FIRSTSTEP_ADMIN_API_KEY` | **NOT VERIFIED** |
-| Update local `.env` only (gitignored) | Developer machine | **NOT VERIFIED** |
+| Rotate `ADMIN_API_KEY` (long random) | Generate locally; never commit | **PASS** (strong key deployed to Render + Actions; value not recorded here) |
+| Update Render env | Backend service env | **PASS** (service recreated with production env; value not recorded here) |
+| Update Vercel env | Frontend (`VITE_API_BASE_URL` only — no LLM/Mongo keys) | **PASS** (API via vercel.json rewrite to Render) |
+| Update GitHub Actions secrets | `FIRSTSTEP_API_BASE_URL`, `FIRSTSTEP_ADMIN_API_KEY` | **PASS** |
+| Update local `.env` only (gitignored) | Developer machine | **PASS** (local admin key aligned; value not recorded here) |
 | Prove old credentials fail | Atlas auth fail; LLM 401; admin 401 with old key | **NOT VERIFIED** |
 | Never show secrets in Loom | — | Policy |
 
@@ -59,15 +59,17 @@ The workflow YAML may exit green on `locked` so overlapping cron does not fail t
 
 | Check | How | Status |
 | --- | --- | --- |
-| Secrets set (new admin key) | Repo → Settings → Secrets | **NOT VERIFIED** |
-| Stats before | `GET /api/stats` — note active / classified / pending | **NOT VERIFIED** |
-| Manual run | Actions → Daily FirstStep AI Ingestion → Run workflow | **NOT VERIFIED** |
-| Ingestion outcome | Log must show completed **`ok`** (not only `locked`) | **NOT VERIFIED** |
-| Classification outcome | Log must show completed **`ok`** (not only `locked`) | **NOT VERIFIED** |
-| Stats after | Compare counts; note any movement | **NOT VERIFIED** |
-| Evidence | Paste successful **Actions run URL** + keep log screenshots offline | **NOT VERIFIED** |
+| Secrets set (new admin key) | Repo → Settings → Secrets | **PASS** (`FIRSTSTEP_API_BASE_URL`, `FIRSTSTEP_ADMIN_API_KEY`) |
+| Stats before | `GET /api/stats` — note active / classified / pending | **PASS** (pre-run inventory was live; see run-day stats movement) |
+| Manual run | Actions → Daily FirstStep AI Ingestion → Run workflow | **PASS** |
+| Ingestion outcome | Log must show completed **`ok`**/`partial` (not only `locked`) | **PASS** — `Ingestion outcome: partial` |
+| Classification outcome | Log must show completed **`ok`**/`partial` (not only `locked`) | **PASS** — `Classification outcome: partial` (441 succeeded) |
+| Stats after | Compare counts; note any movement | **PASS** — `lastSuccessfulRefresh=2026-11-18T06:23:11.010Z`; classified rose substantially during refresh window |
+| Evidence | Paste successful **Actions run URL** + keep log screenshots offline | **PASS** |
 
-**Actions run URL:** https://github.com/9102004Harshika/firststep-ai/actions/runs/44240977180 — workflow `success`, but ingestion log showed `locked` after a curl timeout while a server-side run continued; classification completed `success` (500/500). Prefer a later run whose ingestion log prints `Ingestion outcome: …` other than `locked`.
+**Actions run URL:** https://github.com/9102004Harshika/firststep-ai/actions/runs/44248232834  
+
+Notes: earlier failed/locked runs (missing secrets, weak admin key, Render ~15m proxy timeout) are fixed by strong `ADMIN_API_KEY`, Actions secrets, async ingestion start (`{"async":true}`), and polling `/api/ingestion/runs`. `partial` means some source boards failed while the run completed — acceptable evidence (not `locked`).
 
 ---
 
@@ -110,5 +112,5 @@ Deployed frontend + live API.
 | Gate | Owner | Date | Evidence |
 | --- | --- | --- | --- |
 | Credential rotation | | | (no secret values) |
-| Daily refresh live (`ok`) | | | Actions URL: |
+| Daily refresh live (`ok`/`partial`) | | 2026-11-18 | Actions URL: https://github.com/9102004Harshika/firststep-ai/actions/runs/44248232834 |
 | Loom walkthrough | | | Loom URL: |

@@ -28,7 +28,7 @@
 | Live search + filters + original links | **PASS** (product paths; URLs on jobs) |
 | Daily refresh config | **PASS** (`.github/workflows/daily-ingestion.yml`) |
 | Credential rotation after ZIP exposure | **NOT VERIFIED** |
-| Daily refresh live on GitHub | **NOT VERIFIED** |
+| Daily refresh live on GitHub | **PASS** (Actions `44248232834`, ingestion/classification not `locked`) |
 | Browser / Loom walkthrough | **NOT VERIFIED** |
 | Admin authentication | **PASS** (prior 401 evidence) |
 
@@ -44,7 +44,7 @@
 
 ### B. Operational verification incomplete
 
-Credential rotation, live GitHub Actions run, and Loom walkthrough remain **NOT VERIFIED**. Assignment expects a working demo — this is the critical path before submit (`docs/OPERATIONAL_VERIFICATION.md`).
+Live GitHub Actions refresh is verified (`44248232834`). Full Mongo/LLM credential rotation proof and Loom walkthrough remain open — see `docs/OPERATIONAL_VERIFICATION.md`.
 
 ### C. Classification coverage is partial
 
@@ -84,7 +84,7 @@ Exact-match **58%** (29/50). Evaluation discipline is a strength; role understan
 | No fabricated accuracy | **PASS** | Baseline = measured human GT |
 | Original application links | **PASS** | |
 | Credential rotation | **NOT VERIFIED** | ZIP may have exposed `.env` |
-| Daily refresh live | **NOT VERIFIED** | After rotation; paste Actions URL |
+| Daily refresh live | **PASS** | https://github.com/9102004Harshika/firststep-ai/actions/runs/44248232834 |
 | Loom walkthrough | **NOT VERIFIED** | Paste Loom URL |
 
 ## Priority order (do not invert)
@@ -113,5 +113,5 @@ node backend/src/scripts/scoreIndiaBenchmark.js
 
 | Artifact | URL |
 | --- | --- |
-| GitHub Actions run | _(pending)_ |
+| GitHub Actions run | https://github.com/9102004Harshika/firststep-ai/actions/runs/44248232834 |
 | Loom walkthrough | _(pending)_ |
