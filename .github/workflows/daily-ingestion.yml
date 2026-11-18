@@ -9,7 +9,7 @@ on:
 jobs:
   ingest-and-classify:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
       - name: Trigger ingestion
         env:
@@ -22,7 +22,7 @@ jobs:
             exit 1
           fi
 
-          # Wake Render Free cold starts before the long admin call.
+          # Wake Render Free cold starts before admin calls.
           echo "Warming API..."
           for i in 1 2 3 4 5 6; do
             if curl -fsS --max-time 45 "${API_BASE_URL}/api/health" -o /tmp/health.json; then
@@ -34,17 +34,17 @@ jobs:
             sleep 10
           done
 
-          echo "Starting ingestion..."
-          # Retry transient 503/502 from free-tier spin-up; ingestion itself can take several minutes.
-          # HTTP 409 + status=locked means PipelineLock held — accepted by cron, not submission proof.
+          echo "Starting ingestion (async)..."
+          # Render Free aborts HTTP requests around ~15 minutes. Use async start + poll runs.
           ok_http=0
           for i in 1 2 3 4 5; do
-            http_code=$(curl -sS -o ingestion.json -w "%{http_code}" --max-time 2400 \
+            http_code=$(curl -sS -o ingestion.json -w "%{http_code}" --max-time 60 \
               -X POST "${API_BASE_URL}/api/admin/ingestion/run" \
               -H "x-admin-api-key: ${ADMIN_API_KEY}" \
-              -H "Content-Type: application/json" || true)
+              -H "Content-Type: application/json" \
+              -d '{"async":true}' || true)
             echo "Ingestion HTTP $http_code (attempt $i)"
-            if [ "$http_code" = "200" ] || [ "$http_code" = "201" ] || [ "$http_code" = "409" ]; then
+            if [ "$http_code" = "200" ] || [ "$http_code" = "201" ] || [ "$http_code" = "202" ] || [ "$http_code" = "409" ]; then
               ok_http=1
               break
             fi
@@ -60,21 +60,47 @@ jobs:
             echo "Ingestion request failed after retries"
             exit 1
           fi
-          # Note: status=locked means another run holds PipelineLock (skipped).
-          # Cron tolerates locked so overlap does not fail the schedule.
-          # Submission evidence requires a completed ok run — see docs/OPERATIONAL_VERIFICATION.md
+
           python - <<'PY'
-          import json, sys
+          import json, sys, time, urllib.request
+
+          api = __import__('os').environ['API_BASE_URL'].rstrip('/')
           data = json.load(open('ingestion.json'))
-          ok = data.get('ok')
           status = (data.get('data') or {}).get('status') or data.get('status')
-          if not ok and status != 'locked':
-              print('Ingestion failed', data)
-              sys.exit(1)
           if status == 'locked':
               print('Ingestion outcome: locked (skipped — not sufficient as submission proof of a successful refresh)')
-          else:
-              print('Ingestion outcome:', status)
+              sys.exit(0)
+          if status not in ('accepted', 'success', 'partial', 'running') and not data.get('ok'):
+              print('Ingestion failed to start', data)
+              sys.exit(1)
+
+          print('Ingestion start status:', status)
+          print('Polling /api/ingestion/runs for completion...')
+          terminal = {'success', 'partial', 'failed'}
+          deadline = time.time() + 70 * 60
+          last = None
+          while time.time() < deadline:
+              req = urllib.request.Request(f'{api}/api/ingestion/runs')
+              with urllib.request.urlopen(req, timeout=45) as resp:
+                  payload = json.load(resp)
+              runs = payload.get('data') or []
+              if not runs:
+                  time.sleep(20)
+                  continue
+              latest = runs[0]
+              last = latest
+              st = latest.get('status')
+              print(f"latest_run status={st} id={latest.get('_id')} startedAt={latest.get('startedAt')}")
+              if st in terminal:
+                  if st == 'failed':
+                      print('Ingestion outcome: failed', latest.get('error'))
+                      sys.exit(1)
+                  print('Ingestion outcome:', st)
+                  print('totals:', latest.get('totals'))
+                  sys.exit(0)
+              time.sleep(20)
+          print('Timed out waiting for ingestion completion; last=', last)
+          sys.exit(1)
           PY
 
       - name: Trigger classification
