@@ -67,7 +67,7 @@ The workflow YAML may exit green on `locked` so overlapping cron does not fail t
 | Stats after | Compare counts; note any movement | **NOT VERIFIED** |
 | Evidence | Paste successful **Actions run URL** + keep log screenshots offline | **NOT VERIFIED** |
 
-**Actions run URL:** _(paste here — must be an `ok` run)_
+**Actions run URL:** https://github.com/9102004Harshika/firststep-ai/actions/runs/44240977180 — workflow `success`, but ingestion log showed `locked` after a curl timeout while a server-side run continued; classification completed `success` (500/500). Prefer a later run whose ingestion log prints `Ingestion outcome: …` other than `locked`.
 
 ---
 
